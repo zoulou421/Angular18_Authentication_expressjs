@@ -1,7 +1,8 @@
 const express=require('express');
 const router=express.Router();
-
 const mongoose = require('mongoose');
+const User=require('../models/user')
+
 
 mongoose.connect('mongodb+srv://root:passer@cluster0.93mfx.mongodb.net/eventsdb')
   .then(() => {
@@ -26,6 +27,18 @@ mongoose.connect(db,err=>{
 
 router.get('/',(req,res)=>{
     res.send('From API route')
+})
+
+router.get('/register',(req,res)=>{
+    let userData=req.body
+    let user=new User(userData)
+    user.save((error,registeredUser)=>{
+        if(error){
+            console.log(error)
+        }else{
+            res.status(200).send(registeredUser)
+        }
+    })
 })
 
 module.exports=router
