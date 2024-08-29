@@ -36,7 +36,7 @@ router.get('/register',(req,res)=>{
         if(error){
             console.log(error)
         }else{
-            res.status(200).send(registeredUser)
+            res.status(200).send(registeredUser);
         }
     })
 })
